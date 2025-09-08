@@ -427,7 +427,7 @@
             return progress ? JSON.parse(progress) : { completedCourses: [], completionYear: null };
         }
 
-        function saveTrainingProgress(progress) {
+               function saveTrainingProgress(progress) {
             localStorage.setItem('trainingProgress', JSON.stringify(progress));
         }
 
@@ -438,8 +438,10 @@
             const currentYear = now.getFullYear();
             const currentMonth = now.getMonth() + 1; 
 
+            // 9월을 기준으로 새로운 교육 사이클 시작 (예: 2025년 9월 ~ 2026년 8월)
             const currentTrainingYear = (currentMonth < 9) ? currentYear - 1 : currentYear;
 
+            // 저장된 완료 연도가 현재 교육 사이클 연도보다 이전이면 초기화
             if (progress.completionYear && currentTrainingYear > progress.completionYear) {
                 progress = { completedCourses: [], completionYear: null };
                 saveTrainingProgress(progress);
@@ -458,8 +460,9 @@
                 card.className = "course-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col";
                 
                 let buttonHtml = '';
+                // [수정됨] '이수 완료' 상태일 때도 다시 볼 수 있도록 버튼으로 변경
                 if (isCompleted) {
-                    buttonHtml = `<div class="w-full bg-green-500 text-white font-bold py-2 px-4 rounded-lg text-center">✅ 이수 완료</div>`;
+                    buttonHtml = `<button data-course-id="${course.id}" class="view-course-btn w-full bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition-colors">✅ 이수 완료 (다시 보기)</button>`;
                 } else if (isUnlocked) {
                     buttonHtml = `<button data-course-id="${course.id}" class="view-course-btn w-full bg-${course.themeColor}-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-${course.themeColor}-600 transition-colors">이 교육 과정 보기</button>`;
                 } else {
@@ -479,7 +482,7 @@
             
             document.querySelectorAll('.view-course-btn').forEach(button => {
                 button.addEventListener('click', (e) => {
-                    loadCourse(parseInt(e.target.dataset.courseId));
+                    loadCourse(parseInt(e.currentTarget.dataset.courseId));
                 });
             });
         }
