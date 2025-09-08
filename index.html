@@ -304,6 +304,7 @@
 
             coursesData.forEach(course => {
                 const isCompleted = progress.completedCourses.includes(course.id);
+                const isPreviousCompleted = course.id === 1 || progress.completedCourses.includes(course.id - 1);
                 
                 const courseUnlockYear = (course.unlockMonth >= 9) ? currentTrainingYear : currentTrainingYear + 1;
                 const unlockDate = new Date(courseUnlockYear, course.unlockMonth - 1, 1);
