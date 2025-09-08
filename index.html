@@ -595,7 +595,7 @@
             document.getElementById('submit-quiz').addEventListener('click', () => {
                 let score = 0;
                 currentQuizQuestions.forEach((quizItem, index) => {
-                    const selected = document.querySelector(`input[name="question${index}"]:checked`);
+                    const selected = document.querySelector(`#training-view input[name="question${index}"]:checked`);
                     if (selected && selected.value === quizItem.answer) score++;
                 });
                 finalQuizScore = score * 10;
@@ -607,15 +607,15 @@
             });
 
             document.getElementById('confirm-completion').addEventListener('click', () => {
-                const userName = document.getElementById('userName').value.trim();
-                const completionDate = document.getElementById('completionDate').value;
+                const userName = trainingView.querySelector('#userName').value.trim();
+                const completionDate = trainingView.querySelector('#completionDate').value;
                 if (!userName) { alert('소속과 이름을 입력해주세요.'); return; }
                 
                 completeCourse(currentCourse.id);
                 openCertificateWindow(`${currentCourse.title}`, userName, completionDate, finalQuizScore);
             });
 
-            const completionDateInput = document.getElementById('completionDate');
+            const completionDateInput = trainingView.querySelector('#completionDate');
             if (completionDateInput) {
                 completionDateInput.value = new Date().toISOString().split('T')[0];
             }
