@@ -627,16 +627,24 @@
 
             // 퀴즈 초기화 함수
             function resetQuiz() {
-                // 모든 선택 해제
-                currentQuizQuestions.forEach((_, index) => {
-                    const options = document.querySelectorAll(`#training-view input[name="question${index}"]`);
-                    options.forEach(option => {
-                        option.checked = false;
-                        const label = option.parentElement;
-                        label.classList.remove('correct', 'incorrect');
-                    });
-                });
-                
+                 // 새로운 랜덤 문제 생성
+                currentQuizQuestions = currentCourse.quizBank.sort(() => 0.5 - Math.random()).slice(0, 10);
+		// 퀴즈 컨테이너 업데이트
+		const quizContainer = document.getElementById('quiz-container');
+		quizContainer.innerHTML = '';
+                // 새로운 문제 표시
+		 currentQuizQuestions.forEach((quizItem, index) => {
+			const questionElement = document.createElement('div');
+			questionElement.className = 'mb-6';
+			let optionsHtml = quizItem.options.map(option =>
+				 `<label class="block p-3 my-2 border rounded-lg cursor-pointer hover:bg-${currentCourse.themeColor}-50 transition quiz-option">
+					<input type="radio" name="question${index}" value="${option}" class="mr-2"> ${option}
+				</label>`
+			).join('');
+			questionElement.innerHTML = `<p class="font-bold mb-2">${index + 1}. ${quizItem.question}</p><div>${optionsHtml}</div>`;
+                	quizContainer.appendChild(questionElement);
+		});
+
                 // 결과 메시지 숨기기
                 document.getElementById('quiz-results').innerHTML = '';
                 
