@@ -410,7 +410,7 @@
             }
         ];
 
-        let player;
+         let player;
         let currentCourse = null;
         let currentQuizQuestions = [];
         let finalQuizScore = 0;
@@ -427,7 +427,7 @@
             return progress ? JSON.parse(progress) : { completedCourses: [], completionYear: null };
         }
 
-               function saveTrainingProgress(progress) {
+        function saveTrainingProgress(progress) {
             localStorage.setItem('trainingProgress', JSON.stringify(progress));
         }
 
@@ -460,7 +460,6 @@
                 card.className = "course-card bg-white rounded-xl shadow-lg overflow-hidden flex flex-col";
                 
                 let buttonHtml = '';
-                // [수정됨] '이수 완료' 상태일 때도 다시 볼 수 있도록 버튼으로 변경
                 if (isCompleted) {
                     buttonHtml = `<button data-course-id="${course.id}" class="view-course-btn w-full bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition-colors">✅ 이수 완료 (다시 보기)</button>`;
                 } else if (isUnlocked) {
@@ -595,14 +594,80 @@
                 quizContainer.appendChild(questionElement);
             });
 
-            document.getElementById('submit-quiz').addEventListener('click', () => {
+            // 퀴즈 오답 표시 함수
+            function markQuizAnswers() {
                 let score = 0;
                 currentQuizQuestions.forEach((quizItem, index) => {
                     const selected = document.querySelector(`#training-view input[name="question${index}"]:checked`);
+                    const options = document.querySelectorAll(`#training-view input[name="question${index}"]`);
+                    
+                    // 모든 옵션에 정답/오답 표시
+                    options.forEach(option => {
+                        const label = option.parentElement;
+                        // 기존 클래스 제거
+                        label.classList.remove('correct', 'incorrect');
+                        
+                        // 정답 표시
+                        if (option.value === quizItem.answer) {
+                            label.classList.add('correct');
+                        }
+                        
+                        // 사용자가 선택한 오답 표시
+                        if (option.checked && option.value !== quizItem.answer) {
+                            label.classList.add('incorrect');
+                        }
+                    });
+                    
+                    // 정답 체크
                     if (selected && selected.value === quizItem.answer) score++;
                 });
+                
+                return score;
+            }
+
+            // 퀴즈 초기화 함수
+            function resetQuiz() {
+                // 모든 선택 해제
+                currentQuizQuestions.forEach((_, index) => {
+                    const options = document.querySelectorAll(`#training-view input[name="question${index}"]`);
+                    options.forEach(option => {
+                        option.checked = false;
+                        const label = option.parentElement;
+                        label.classList.remove('correct', 'incorrect');
+                    });
+                });
+                
+                // 결과 메시지 숨기기
+                document.getElementById('quiz-results').innerHTML = '';
+                
+                // 퀴즈 완료 상태 초기화
+                isQuizCompleted = false;
+                finalQuizScore = 0;
+                
+                // 확인 오버레이 다시 표시
+                checkCompletionStatus();
+            }
+
+            // 수정된 퀴즈 제출 이벤트 핸들러
+            document.getElementById('submit-quiz').addEventListener('click', () => {
+                // 점수 계산 및 오답 표시
+                const score = markQuizAnswers();
+                
                 finalQuizScore = score * 10;
-                document.getElementById('quiz-results').innerHTML = `<h4 class="text-2xl font-bold">테스트 결과</h4><p class="text-xl mt-2">총 10문제 중 <span class="font-bold text-${currentCourse.themeColor}-600">${score}</span>문제를 맞혔습니다. (${finalQuizScore}점)</p><p class="mt-4 text-slate-600">${finalQuizScore >= 70 ? '훌륭합니다! 테스트를 통과했습니다.' : '아쉽지만 통과하지 못했습니다. 내용을 다시 학습하고 재응시해주세요.'}</p>`;
+                
+                // 결과 메시지에 재풀이 버튼 추가
+                document.getElementById('quiz-results').innerHTML = `
+                    <h4 class="text-2xl font-bold">테스트 결과</h4>
+                    <p class="text-xl mt-2">총 10문제 중 <span class="font-bold text-${currentCourse.themeColor}-600">${score}</span>문제를 맞혔습니다. (${finalQuizScore}점)</p>
+                    <p class="mt-4 text-slate-600">${finalQuizScore >= 70 ? '훌륭합니다! 테스트를 통과했습니다.' : '아쉽지만 통과하지 못했습니다. 내용을 다시 학습하고 재응시해주세요.'}</p>
+                    <div class="mt-6">
+                        <button id="retry-quiz" class="bg-${currentCourse.themeColor}-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-${currentCourse.themeColor}-700 transition-colors">다시 풀기</button>
+                    </div>
+                `;
+                
+                // 재풀이 버튼 이벤트 추가
+                document.getElementById('retry-quiz').addEventListener('click', resetQuiz);
+                
                 if (finalQuizScore >= 70) {
                     isQuizCompleted = true;
                     checkCompletionStatus();
