@@ -1,196 +1,189 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
-    <title>통합 위험물 안전관리 시스템</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-        }
-        .course-card {
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .course-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-        }
-        .content-card {
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .content-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-        }
-        .quiz-option.correct {
-            background-color: #dcfce7; 
-        }
-        .quiz-option.incorrect {
-            background-color: #fee2e2;
-        }
-        #video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-        }
-        #player {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        #confirmation-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(4px);
-            z-index: 10;
-        }
-        #custom-play-button {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 5;
-            transition: opacity 0.3s;
-        }
-        #custom-play-button:hover {
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-        #custom-play-button svg {
-            width: 80px;
-            height: 80px;
-            fill: white;
-        }
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
-            height: 0;
-            overflow: hidden;
-            background-color: #000;
-        }
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .tab-button.active {
-            border-color: currentColor;
-            background-color: currentColor;
-            color: white !important;
-        }
-        /* 알림 박스 스타일 */
-        .privacy-notice {
-            background-color: #eff6ff;
-            border-left: 4px solid #3b82f6;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            border-radius: 0.375rem;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>통합 위험물 안전관리 시스템</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .course-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .content-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .quiz-option.correct {
+            background-color: #dcfce7; 
+        }
+        .quiz-option.incorrect {
+            background-color: #fee2e2;
+        }
+        #video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+        }
+        #player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #confirmation-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(4px);
+            z-index: 10;
+        }
+        #custom-play-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 5;
+            transition: opacity 0.3s;
+        }
+        #custom-play-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        #custom-play-button svg {
+            width: 80px;
+            height: 80px;
+            fill: white;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .tab-button.active {
+            border-color: currentColor;
+            background-color: currentColor;
+            color: white !important;
+        }
+    </style>
 </head>
 <body class="bg-slate-100">
 
-    <div id="portal-view">
-        <header class="bg-white shadow-md">
-            <div class="container mx-auto px-6 py-6 text-center">
-                <img src="https://d32gkk464bsqbe.cloudfront.net/company-profiles/o/58445cdc9bb4dffd9edfde94c4a06cf87f4ac55f.jpeg?v=6.8.13" alt="Thermo Fisher Scientific Logo" class="w-48 mx-auto mb-4">
-                <h1 class="text-3xl md:text-5xl font-bold text-red-600">위험물 안전관리 교육 포털</h1>
-                <p class="text-slate-600 mt-4 max-w-3xl mx-auto">안전은 우리 모두의 책임입니다. 본 교육 포털을 통해 위험물 안전 지식을 체계적으로 학습하고, 안전한 작업 환경을 만들어 갑시다.</p>
-            </div>
-        </header>
-        <main class="container mx-auto px-6 py-12">
-            <div id="portal-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Course cards are generated by JavaScript -->
-            </div>
-             <div id="certificate-generator" class="pt-16">
-                 <div class="max-w-2xl mx-auto bg-white p-8 sm:p-10 rounded-xl shadow-lg transition transform hover:-translate-y-1">
-                    <div class="text-center mb-10">
-                        <h2 class="text-2xl md:text-3xl font-bold text-slate-700">이수 확인증 발급</h2>
-                        <p class="text-slate-500 mt-2">교육을 완료한 직원의 정보를 입력하여 확인증을 생성하세요.</p>
-                    </div>
-                    
-                    <!-- [추가] 개인정보 보호 안내 문구 (관리자 섹션) -->
-                    <div class="privacy-notice">
-                        <p class="text-xs md:text-sm text-blue-700 leading-relaxed font-medium">
-                            ℹ️ 이 페이지에 입력한 정보는 웹브라우저에만 저장되며 외부로 전송되지 않습니다. <br>
-                            사용 후에는 브라우저에서 직접 삭제해 주시기 바랍니다.
-                        </p>
-                    </div>
+    <div id="portal-view">
+        <header class="bg-white shadow-md">
+            <div class="container mx-auto px-6 py-6 text-center">
+                <img src="https://d32gkk464bsqbe.cloudfront.net/company-profiles/o/58445cdc9bb4dffd9edfde94c4a06cf87f4ac55f.jpeg?v=6.8.13" alt="Thermo Fisher Scientific Logo" class="w-48 mx-auto mb-4">
+                <h1 class="text-3xl md:text-5xl font-bold text-red-600">위험물 안전관리 교육 포털</h1>
+                <p class="text-slate-600 mt-4 max-w-3xl mx-auto">안전은 우리 모두의 책임입니다. 본 교육 포털을 통해 위험물 안전 지식을 체계적으로 학습하고, 안전한 작업 환경을 만들어 갑시다.</p>
+            </div>
+        </header>
+        <main class="container mx-auto px-6 py-12">
+            <div id="portal-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Course cards are generated by JavaScript -->
+            </div>
+             <div id="certificate-generator" class="pt-16">
+                 <div class="max-w-2xl mx-auto bg-white p-8 sm:p-10 rounded-xl shadow-lg transition transform hover:-translate-y-1">
+                    <div class="text-center mb-10">
+                        <h2 class="text-2xl md:text-3xl font-bold text-slate-700">이수 확인증 발급</h2>
+                        <p class="text-slate-500 mt-2">교육을 완료한 직원의 정보를 입력하여 확인증을 생성하세요.</p>
+                    </div>
 
-                    <form id="certificate-form" class="space-y-6">
-                        <!-- Certificate form is generated by JavaScript -->
-                    </form>
-                </div>
-            </div>
-        </main>
-    </div>
+                          <!-- [추가] 개인정보 보호 안내 문구 (관리자 섹션) -->
+                          <div class="privacy-notice">
+                          	<p class="text-xs md:text-sm text-blue-700 leading-relaxed font-medium">
+                            	      ℹ️ 이 페이지에 입력한 정보는 웹브라우저에만 저장되며 외부로 전송되지 않습니다. <br>
+                            	      사용 후에는 브라우저에서 직접 삭제해 주시기 바랍니다.
+                          	</p>
+                      	  </div>
 
-    <div id="training-view" class="hidden">
-        <!-- Training content is injected here by JavaScript -->
-    </div>
-    
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script>
-        const coursesData = [
-            {
-                id: 1,
-                title: "위험물 안전관리법 개요",
-                shortTitle: "개요",
-                description: "위험물 안전관리법의 기본 목적, 핵심 용어, 그리고 제1류부터 제6류까지 위험물의 전반적인 분류 및 특성을 학습합니다.",
-                themeColor: "amber",
-                videoId: "drCL6rvKr2Q",
-                unlockMonth: 9,
-                content: `<section id="overview" class="py-12 md:py-16"><h3 class="text-2xl md:text-3xl font-bold text-center mb-10">위험물 안전 관리법이란?</h3><div class="grid md:grid-cols-2 gap-8"><div class="bg-white p-8 rounded-lg shadow-lg content-card"><h4 class="text-xl font-bold text-amber-600 mb-4">법의 목적 (제1조)</h4><p class="text-stone-600 leading-relaxed">위험물의 <span class="font-bold">저장, 취급, 운반</span>에 관한 사항을 규정하고, 위험물로 인한 <span class="font-bold">위해(危害)를 방지</span>하여 <span class="font-bold">공공의 안전을 확보</span>하는 것을 목적으로 합니다.</p></div><div class="bg-white p-8 rounded-lg shadow-lg content-card"><h4 class="text-xl font-bold text-amber-600 mb-4">핵심 용어 정리</h4><ul class="space-y-3 text-stone-600"><li><strong class="text-stone-800">위험물:</strong> 인화성 또는 발화성 등의 성질을 가지는 것으로 대통령령으로 정하는 물품.</li><li><strong class="text-stone-800">지정수량:</strong> 위험성을 고려하여 정한 최소 기준으로, 이 수량 이상을 저장/취급할 경우 법의 규제를 받습니다.</li><li><strong class="text-stone-800">제조소등:</strong> 위험물을 제조, 저장, 또는 취급하는 모든 시설.</li></ul></div></div></section><section id="classification" class="py-12 md:py-16 bg-white rounded-xl shadow-lg"><div class="text-center mb-10 px-4"><h3 class="text-2xl md:text-3xl font-bold mb-2">위험물의 종류 (제1류 ~ 제6류)</h3><p class="text-stone-600">아래 탭을 클릭하여 유별 특성을 확인하세요.</p></div><div id="tabs-container" class="px-4 md:px-8"><div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 border-b border-stone-200 pb-4 text-amber-600"><button data-tab="1" class="tab-button active text-sm md:text-base font-medium px-4 py-2 rounded-full border-2 border-amber-500 transition">제1류</button><button data-tab="2" class="tab-button text-sm md:text-base font-medium px-4 py-2 rounded-full border-2 border-amber-500 transition">제2류</button><button data-tab="3" class="tab-button text-sm md:text-base font-medium px-4 py-2 rounded-full border-2 border-amber-500 transition">제3류</button><button data-tab="4" class="tab-button text-sm md:text-base font-medium px-4 py-2 rounded-full border-2 border-amber-500 transition">제4류</button><button data-tab="5" class="tab-button text-sm md:text-base font-medium px-4 py-2 rounded-full border-2 border-amber-500 transition">제5류</button><button data-tab="6" class="tab-button text-sm md:text-base font-medium px-4 py-2 rounded-full border-2 border-amber-500 transition">제6류</button></div><div id="tab-content" class="min-h-[260px]"></div></div></section><section id="accidents" class="py-12 md:py-16"><h3 class="text-2xl md:text-3xl font-bold text-center mb-10">주요 위험물 사고 사례</h3><div class="grid md:grid-cols-1 lg:grid-cols-2 gap-10"><div class="bg-white rounded-lg shadow-lg overflow-hidden content-card"><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/80odRsKUXvc" title="YouTube video player" frameborder="0" allowfullscreen></iframe></div><div class="p-6"><h4 class="font-bold text-xl mb-2">구미 불산 누출 사고 (2012)</h4><p class="text-stone-600 text-sm mb-4">탱크로리 밸브 오작동으로 불산 약 8톤이 누출되어 5명이 사망하고 심각한 환경오염을 초래한 사고입니다.</p></div></div><div class="bg-white rounded-lg shadow-lg overflow-hidden content-card"><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/UfK34GIvPY8" title="YouTube video player" frameborder="0" allowfullscreen></iframe></div><div class="p-6"><h4 class="font-bold text-xl mb-2">이천 물류창고 화재 (2020)</h4><p class="text-stone-600 text-sm mb-4">용접 불티가 우레탄폼에 옮겨붙어 유독가스가 발생, 38명의 근로자가 사망한 대형 화재 사고입니다.</p></div></div></div></section>`,
-                tabData: [{ id: 1, content: `<h4 class="text-2xl font-bold text-amber-600 mb-4">제1류: 산화성 고체</h4><p class="mb-2"><strong>특징:</strong> 산소를 다량 함유하여 다른 물질의 연소를 돕는 불연성 물질. 가열, 충격 시 산소를 방출하여 폭발적으로 연소시킴.</p><p class="mb-2"><strong>예시:</strong> 질산암모늄</p><p class="font-bold text-red-600 bg-red-100 p-3 rounded-md">🚨 안전수칙: 가연물 접촉 금지, 가열/충격 주의</p>` }, { id: 2, content: `<h4 class="text-2xl font-bold text-amber-600 mb-4">제2류: 가연성 고체</h4><p class="mb-2"><strong>특징:</strong> 낮은 온도에서 착화하기 쉬우며 연소 속도가 빠름. 연소 시 유독가스 발생 가능.</p><p class="mb-2"><strong>예시:</strong> 유황, 마그네슘</p><p class="font-bold text-red-600 bg-red-100 p-3 rounded-md">🚨 안전수칙: 점화원 엄금, 산화제 접촉 금지</p>` }, { id: 3, content: `<h4 class="text-2xl font-bold text-amber-600 mb-4">제3류: 자연발화성 및 금수성</h4><p class="mb-2"><strong>특징:</strong> 공기 중에서 스스로 발화하거나, 물과 접촉 시 가연성 가스를 발생시킴.</p><p class="mb-2"><strong>예시:</strong> 칼륨, 나트륨</p><p class="font-bold text-red-600 bg-red-100 p-3 rounded-md">🚨 안전수칙: 물기 엄금, 공기 노출 차단</p>` }, { id: 4, content: `<h4 class="text-2xl font-bold text-amber-600 mb-4">제4류: 인화성 액체</h4><p class="mb-2"><strong>특징:</strong> 증기는 공기보다 무거우며, 작은 불꽃에도 쉽게 인화. 정전기로도 발화 가능.</p><p class="mb-2"><strong>예시:</strong> 휘발유, 알코올</p><p class="font-bold text-red-600 bg-red-100 p-3 rounded-md">🚨 안전수칙: 화기 엄금, 통풍/환기 철저</p>` }, { id: 5, content: `<h4 class="text-2xl font-bold text-amber-600 mb-4">제5류: 자기반응성 물질</h4><p class="mb-2"><strong>특징:</strong> 분자 내 산소를 함유하여 산소 없이도 연소. 가열, 충격에 매우 민감하여 폭발 위험이 큼.</p><p class="mb-2"><strong>예시:</strong> 니트로글리세린</p><p class="font-bold text-red-600 bg-red-100 p-3 rounded-md">🚨 안전수칙: 가열/충격 절대 금지, 소분 저장</p>` }, { id: 6, content: `<h4 class="text-2xl font-bold text-amber-600 mb-4">제6류: 산화성 액체</h4><p class="mb-2"><strong>특징:</strong> 불연성이지만 강한 산화력을 가진 액체. 부식성이 강하고 피부 접촉 시 화상 위험.</p><p class="mb-2"><strong>예시:</strong> 과산화수소, 질산</p><p class="font-bold text-red-600 bg-red-100 p-3 rounded-md">🚨 안전수칙: 가연물 접촉 금지, 내산성 용기 사용</p>` }],
-                quizBank: [
-                    { question: " 위험물 안전관리법의 주된 목적은 무엇인가요?", options: ["위험물 판매 촉진", "공공의 안전 확보", "위험물 제조 기술 발전", "위험물 가격 안정"], answer: "공공의 안전 확보" },
-                    { question: " 다음 중 제1류 위험물(산화성 고체)의 특징은 무엇인가요?", options: ["물과 반응하여 발화", "다른 물질의 연소를 도움", "자체적으로 폭발", "스스로 타는 성질"], answer: "다른 물질의 연소를 도움" },
-                    { question: " 휘발유는 몇 류 위험물에 해당하나요?", options: ["제1류", "제3류", "제4류", "제5류"], answer: "제4류" },
-                    { question: " 물과 접촉 시 가연성 가스를 발생시키는 위험물은 몇 류인가요?", options: ["제2류", "제3류", "제5류", "제6류"], answer: "제3류" },
-                    { question: " 자체적으로 산소를 가지고 있어 외부 산소 없이도 연소하는 위험물은?", options: ["제4류 (인화성 액체)", "제5류 (자기반응성 물질)", "제6류 (산화성 액체)", "제2류 (가연성 고체)"], answer: "제5류 (자기반응성 물질)" },
-                    { question: " 다음 중 성격이 다른 하나는?", options: ["질산", "과산화수소", "마그네슘", "과염소산"], answer: "마그네슘" },
-                    { question: " 지정수량의 의미로 올바른 것은?", options: ["하루에 사용할 수 있는 최대량", "법적 규제를 받는 기준이 되는 최소 수량", "보관할 수 있는 최대량", "운반할 수 있는 최소량"], answer: "법적 규제를 받는 기준이 되는 최소 수량" },
-                    { question: " 이천 물류창고 화재에서 불이 급격히 번진 주된 원인 물질은 무엇이었나요?", options: ["목재", "우레탄폼", "종이박스", "스티로폼"], answer: "우레탄폼" },
-                    { question: " 제1류부터 제6류까지 모든 위험물은 화재 시 물로 소화할 수 있다. (O/X)", options: ["O (맞다)", "X (틀리다)"], answer: "X (틀리다)" },
-                    { question: " 구미 불산 누출 사고의 원인이 된 위험물질은 무엇인가요?", options: ["염산", "황산", "불화수소(불산)", "질산"], answer: "불화수소(불산)" },
-                    { question: " '제조소등'이 아닌 곳에서 지정수량 이상의 위험물을 저장, 취급하는 행위는 허용되는가?", options: ["허용된다", "허용되지 않는다", "신고하면 허용된다", "소량만 허용된다"], answer: "허용되지 않는다" },
-                    { question: " 제2류 위험물인 마그네슘 화재 시 물을 뿌리면 어떤 가스가 발생하여 더 위험해지는가?", options: ["산소", "질소", "수소", "이산화탄소"], answer: "수소" },
-                    { question: " 제4류 위험물의 증기는 일반적으로 공기보다 무거운가, 가벼운가?", options: ["가볍다", "무겁다", "비슷하다", "물질마다 다르다"], answer: "무겁다" },
-                    { question: " 다음 중 '금수성' 물질의 의미는 무엇인가?", options: ["금속을 녹이는 물질", "물을 만나면 격렬하게 반응하는 물질", "황금처럼 귀한 물질", "수분을 좋아하는 물질"], answer: "물을 만나면 격렬하게 반응하는 물질" },
-                    { question: " 제5류 위험물이 폭발 위험이 큰 이유는 무엇인가?", options: ["독성이 강해서", "가연물과 산소를 모두 가지고 있어서", "액체 상태라서", "쉽게 증발해서"], answer: "가연물과 산소를 모두 가지고 있어서" },
-                    { question: " 위험물 안전관리법에서 '취급소'가 아닌 것은?", options: ["주유취급소", "판매취급소", "옥내탱크저장소", "이송취급소"], answer: "옥내탱크저장소" },
-                    { question: " 제6류 위험물의 공통적인 성질은 무엇인가?", options: ["가연성", "인화성", "산화성 및 부식성", "자기반응성"], answer: "산화성 및 부식성" },
-                    { question: " 위험물을 취급할 때 정전기 방지 조치가 특히 중요한 위험물은 몇 류인가?", options: ["제1류", "제2류", "제3류", "제4류"], answer: "제4류" },
-                    { question: " 화재 발생 시 물을 사용하여 냉각소화하는 것이 효과적인 위험물은?", options: ["칼륨", "휘발유", "황린", "적린"], answer: "적린" },
-                    { question: " 위험물 안전관리법의 최종적인 목표는 무엇이라고 할 수 있는가?", options: ["기업의 이윤 증대", "위험물 기술 개발", "공공의 안전과 생명 보호", "소방관의 역할 증대"], answer: "공공의 안전과 생명 보호" }
-                ]
-            },
-            {
-                id: 2,
-                title: "제1류 위험물 (산화성 고체)",
-                shortTitle: "제1류",
-                description: "다른 물질의 연소를 돕는 산화성 고체의 종류, 특성, 저장 및 취급 방법, 관련 사고 사례를 심층적으로 학습합니다.",
-                themeColor: "lime",
-                videoId: "AWcx5UvUAZM",
-                unlockMonth: 10,
-                content: `<section id="overview" class="py-12 md:py-16"><h3 class="text-2xl md:text-3xl font-bold text-center mb-10">제1류 위험물: 산화성 고체란?</h3><div class="grid md:grid-cols-2 gap-8 items-center"><div class="bg-white p-8 rounded-lg shadow-lg content-card"><h4 class="text-xl font-bold text-lime-600 mb-4">정의 및 특징</h4><p class="text-slate-600 leading-relaxed">자체는 연소하지 않는 불연성 물질이지만, 분자 내에 산소를 다량 함유하고 있어 다른 물질의 연소를 돕거나 촉진시키는 강한 산화력을 가진 고체입니다. 가열, 충격, 마찰에 의해 분해되어 산소를 방출하며, 이는 주변 가연물의 연소를 폭발적으로 만듭니다.</p></div><div class="bg-white p-8 rounded-lg shadow-lg content-card"><h4 class="text-xl font-bold text-lime-600 mb-4">주요 품명</h4><ul class="space-y-2 text-slate-600 list-disc list-inside"><li><strong>염소산염류</strong> (염소산칼륨)</li><li><strong>과염소산염류</strong> (과염소산암모늄)</li><li><strong>질산염류</strong> (질산암모늄)</li><li><strong>무기과산화물</strong> (과산화나트륨)</li></ul></div></div></section><section id="rules" class="py-12 md:py-16"><h3 class="text-2xl md:text-3xl font-bold text-center mb-10">저장, 취급 및 소화 방법</h3><div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8"><div class="bg-white p-6 rounded-lg shadow-lg content-card"><h4 class="font-bold text-lg my-2 text-lime-700 text-center">✅ 저장 및 취급</h4><ul class="text-slate-600 text-sm list-disc list-inside space-y-2 mt-4"><li>가열, 충격, 마찰 및 가연물과의 접촉을 피해야 함.</li><li>용기는 밀폐하고, 환기가 잘 되는 서늘하고 건조한 곳에 보관.</li><li><strong>(중요)</strong> 알칼리금속의 과산화물은 물과 반응하여 산소를 발생시키므로 물기 엄금.</li></ul></div><div class="bg-white p-6 rounded-lg shadow-lg content-card"><h4 class="font-bold text-lg my-2 text-lime-700 text-center">🔥 화재 시 특징</h4><ul class="text-slate-600 text-sm list-disc list-inside space-y-2 mt-4"><li>자체 산소로 인해 연소가 매우 격렬하고 빠르게 진행됨.</li><li>가연물과 혼합되어 있을 경우 폭발적으로 연소.</li></ul></div><div class="bg-white p-6 rounded-lg shadow-lg content-card"><h4 class="font-bold text-lg my-2 text-lime-700 text-center">🧯 소화 방법</h4><ul class="text-slate-600 text-sm list-disc list-inside space-y-2 mt-4"><li><strong>주수 소화 (물로 냉각):</strong> 대부분의 제1류 위험물 화재 시 다량의 물을 사용하여 냉각 소화.</li><li><strong>예외:</strong> 알칼리금속의 과산화물 화재 시에는 물 사용을 절대 금지하고, 마른 모래 등으로 질식 소화.</li></ul></div></div></section><section id="accidents" class="py-12 md:py-16"><h3 class="text-2xl md:text-3xl font-bold text-center mb-10">제1류 위험물 관련 사고 사례</h3><div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden content-card"><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/_U2sC0Jg0n8" title="YouTube video player" frameborder="0" allowfullscreen></iframe></div><div class="p-6"><h4 class="font-bold text-xl mb-2">베이루트 항구 질산암모늄 폭발 (2020)</h4><p class="text-slate-600 text-sm mb-4">항구 창고에 부적절하게 보관되어 있던 약 2,750톤의 질산암모늄이 대폭발을 일으켜 200명 이상이 사망하고 도시의 절반이 파괴되는 대참사가 발생했습니다.</p><div class="bg-lime-100 p-3 rounded"><h5 class="font-bold text-lime-800 text-sm">원인 및 교훈</h5><p class="text-lime-700 text-xs mt-1">산화성 고체를 안전 조치 없이 대량으로 장기간 보관하는 것의 위험성을 보여줍니다. 위험물은 법적 기준에 따라 보관하고, 주변 점화원을 철저히 관리해야 합니다.</p></div></div></div></section>`,
+
+                    <form id="certificate-form" class="space-y-6">
+                        <!-- Certificate form is generated by JavaScript -->
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="training-view" class="hidden">
+        <!-- Training content is injected here by JavaScript -->
+    </div>
+    
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        const coursesData = [
+            {
+                id: 1,
+                title: "위험물 안전관리법 개요",
+                shortTitle: "개요",
+                description: "위험물 안전관리법의 기본 목적, 핵심 용어, 그리고 제1류부터 제6류까지 위험물의 전반적인 분류 및 특성을 학습합니다.",
+                themeColor: "amber",
+                videoId: "drCL6rvKr2Q",
+                unlockMonth: 9,
+                content: `<section id="overview" class="py-12 md:py-16"><h3 class="text-2xl md:text-3xl font-bold text-center mb-10">위험물 안전 관리법이란?</h3><div class="grid md:grid-cols-2 gap-8"><div class="bg-white p-8 rounded-lg shadow-lg content-card"><h4 class="text-xl font-bold text-amber-600 mb-4">법의 목적 (제1조)</h4><p class="text-stone-600 leading-relaxed">위험물의 <span class="font-bold">저장, 취급, 운반</span>에 관한 사항을 규정하고, 위험물로 인한 <span class="font-bold">위해(危害)를 방지</span>하여 <span class="font-bold">공공의 안전을 확보</span>하는 것을 목적으로 합니다.</p></div><div class="bg-white p-8 rounded-lg shadow-lg content-card"><h4 class="text-xl font-bold text-amber-600 mb-4">핵심 용어 정리</h4><ul class="space-y-3 text-stone-600"><li><strong class="text-stone-800">위험물:</strong> 인화성 또는 발화성 등의 성질을 가지는 것으로 대통령령으로 정하는 물품.</li><li><strong class="text-stone-800">지정수량:</strong> 위험성을 고려하여 정한 최소 기준으로, 이 수량 이상을 저장/취급할 경우 법의 규제를 받습니다.</li><li><strong class="text-stone-800">제조소등:</strong> 위험물을 제조, 저장, 또는 취급하는 모든 시설.</li></ul></div></div></section><section id="classification" class="py-12 md:py-16 bg-white rounded-xl shadow-lg"><div class="text-center mb-10 px-4"><h3 class="text-2xl md:text-3xl font-bold mb-2">위험물의 종류 (제1류 ~ 제6류)</h3><p class="text-stone-600">아래 탭을 클릭하여 유별 특성을 확인하세요.</p></div><div id="tabs-container" class="px-4 md:px-8"><div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 border-b border-stone-200 pb-4 text-amber-600"><button data-tab="1" class="tab-button active text-sm md:text-base font-medium px-4 py-2 rounded-full border-2 border-amber-500 transition">제1류</button><button data-tab="2" class="tab-button text-sm md:text-base font-medium px-4 py-2 rounded-full border-2 border-amber-500 transition">제2류</button><button data-tab="3" class="tab-button text-sm md:text-base font-medium px-4 py-2 rounded-full border-2 border-amber-500 transition">제3류</button><button data-tab="4" class="tab-button text-sm md:text-base font-medium px-4 py-2 rounded-full border-2 border-amber-500 transition">제4류</button><button data-tab="5" class="tab-button text-sm md:text-base font-medium px-4 py-2 rounded-full border-2 border-amber-500 transition">제5류</button><button data-tab="6" class="tab-button text-sm md:text-base font-medium px-4 py-2 rounded-full border-2 border-amber-500 transition">제6류</button></div><div id="tab-content" class="min-h-[260px]"></div></div></section><section id="accidents" class="py-12 md:py-16"><h3 class="text-2xl md:text-3xl font-bold text-center mb-10">주요 위험물 사고 사례</h3><div class="grid md:grid-cols-1 lg:grid-cols-2 gap-10"><div class="bg-white rounded-lg shadow-lg overflow-hidden content-card"><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/80odRsKUXvc" title="YouTube video player" frameborder="0" allowfullscreen></iframe></div><div class="p-6"><h4 class="font-bold text-xl mb-2">구미 불산 누출 사고 (2012)</h4><p class="text-stone-600 text-sm mb-4">탱크로리 밸브 오작동으로 불산 약 8톤이 누출되어 5명이 사망하고 심각한 환경오염을 초래한 사고입니다.</p></div></div><div class="bg-white rounded-lg shadow-lg overflow-hidden content-card"><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/UfK34GIvPY8" title="YouTube video player" frameborder="0" allowfullscreen></iframe></div><div class="p-6"><h4 class="font-bold text-xl mb-2">이천 물류창고 화재 (2020)</h4><p class="text-stone-600 text-sm mb-4">용접 불티가 우레탄폼에 옮겨붙어 유독가스가 발생, 38명의 근로자가 사망한 대형 화재 사고입니다.</p></div></div></div></section>`,
+                tabData: [{ id: 1, content: `<h4 class="text-2xl font-bold text-amber-600 mb-4">제1류: 산화성 고체</h4><p class="mb-2"><strong>특징:</strong> 산소를 다량 함유하여 다른 물질의 연소를 돕는 불연성 물질. 가열, 충격 시 산소를 방출하여 폭발적으로 연소시킴.</p><p class="mb-2"><strong>예시:</strong> 질산암모늄</p><p class="font-bold text-red-600 bg-red-100 p-3 rounded-md">🚨 안전수칙: 가연물 접촉 금지, 가열/충격 주의</p>` }, { id: 2, content: `<h4 class="text-2xl font-bold text-amber-600 mb-4">제2류: 가연성 고체</h4><p class="mb-2"><strong>특징:</strong> 낮은 온도에서 착화하기 쉬우며 연소 속도가 빠름. 연소 시 유독가스 발생 가능.</p><p class="mb-2"><strong>예시:</strong> 유황, 마그네슘</p><p class="font-bold text-red-600 bg-red-100 p-3 rounded-md">🚨 안전수칙: 점화원 엄금, 산화제 접촉 금지</p>` }, { id: 3, content: `<h4 class="text-2xl font-bold text-amber-600 mb-4">제3류: 자연발화성 및 금수성</h4><p class="mb-2"><strong>특징:</strong> 공기 중에서 스스로 발화하거나, 물과 접촉 시 가연성 가스를 발생시킴.</p><p class="mb-2"><strong>예시:</strong> 칼륨, 나트륨</p><p class="font-bold text-red-600 bg-red-100 p-3 rounded-md">🚨 안전수칙: 물기 엄금, 공기 노출 차단</p>` }, { id: 4, content: `<h4 class="text-2xl font-bold text-amber-600 mb-4">제4류: 인화성 액체</h4><p class="mb-2"><strong>특징:</strong> 증기는 공기보다 무거우며, 작은 불꽃에도 쉽게 인화. 정전기로도 발화 가능.</p><p class="mb-2"><strong>예시:</strong> 휘발유, 알코올</p><p class="font-bold text-red-600 bg-red-100 p-3 rounded-md">🚨 안전수칙: 화기 엄금, 통풍/환기 철저</p>` }, { id: 5, content: `<h4 class="text-2xl font-bold text-amber-600 mb-4">제5류: 자기반응성 물질</h4><p class="mb-2"><strong>특징:</strong> 분자 내 산소를 함유하여 산소 없이도 연소. 가열, 충격에 매우 민감하여 폭발 위험이 큼.</p><p class="mb-2"><strong>예시:</strong> 니트로글리세린</p><p class="font-bold text-red-600 bg-red-100 p-3 rounded-md">🚨 안전수칙: 가열/충격 절대 금지, 소분 저장</p>` }, { id: 6, content: `<h4 class="text-2xl font-bold text-amber-600 mb-4">제6류: 산화성 액체</h4><p class="mb-2"><strong>특징:</strong> 불연성이지만 강한 산화력을 가진 액체. 부식성이 강하고 피부 접촉 시 화상 위험.</p><p class="mb-2"><strong>예시:</strong> 과산화수소, 질산</p><p class="font-bold text-red-600 bg-red-100 p-3 rounded-md">🚨 안전수칙: 가연물 접촉 금지, 내산성 용기 사용</p>` }],
+                quizBank: [
+                    { question: " 위험물 안전관리법의 주된 목적은 무엇인가요?", options: ["위험물 판매 촉진", "공공의 안전 확보", "위험물 제조 기술 발전", "위험물 가격 안정"], answer: "공공의 안전 확보" },
+                    { question: " 다음 중 제1류 위험물(산화성 고체)의 특징은 무엇인가요?", options: ["물과 반응하여 발화", "다른 물질의 연소를 도움", "자체적으로 폭발", "스스로 타는 성질"], answer: "다른 물질의 연소를 도움" },
+                    { question: " 휘발유는 몇 류 위험물에 해당하나요?", options: ["제1류", "제3류", "제4류", "제5류"], answer: "제4류" },
+                    { question: " 물과 접촉 시 가연성 가스를 발생시키는 위험물은 몇 류인가요?", options: ["제2류", "제3류", "제5류", "제6류"], answer: "제3류" },
+                    { question: " 자체적으로 산소를 가지고 있어 외부 산소 없이도 연소하는 위험물은?", options: ["제4류 (인화성 액체)", "제5류 (자기반응성 물질)", "제6류 (산화성 액체)", "제2류 (가연성 고체)"], answer: "제5류 (자기반응성 물질)" },
+                    { question: " 다음 중 성격이 다른 하나는?", options: ["질산", "과산화수소", "마그네슘", "과염소산"], answer: "마그네슘" },
+                    { question: " 지정수량의 의미로 올바른 것은?", options: ["하루에 사용할 수 있는 최대량", "법적 규제를 받는 기준이 되는 최소 수량", "보관할 수 있는 최대량", "운반할 수 있는 최소량"], answer: "법적 규제를 받는 기준이 되는 최소 수량" },
+                    { question: " 이천 물류창고 화재에서 불이 급격히 번진 주된 원인 물질은 무엇이었나요?", options: ["목재", "우레탄폼", "종이박스", "스티로폼"], answer: "우레탄폼" },
+                    { question: " 제1류부터 제6류까지 모든 위험물은 화재 시 물로 소화할 수 있다. (O/X)", options: ["O (맞다)", "X (틀리다)"], answer: "X (틀리다)" },
+                    { question: " 구미 불산 누출 사고의 원인이 된 위험물질은 무엇인가요?", options: ["염산", "황산", "불화수소(불산)", "질산"], answer: "불화수소(불산)" },
+                    { question: " '제조소등'이 아닌 곳에서 지정수량 이상의 위험물을 저장, 취급하는 행위는 허용되는가?", options: ["허용된다", "허용되지 않는다", "신고하면 허용된다", "소량만 허용된다"], answer: "허용되지 않는다" },
+                    { question: " 제2류 위험물인 마그네슘 화재 시 물을 뿌리면 어떤 가스가 발생하여 더 위험해지는가?", options: ["산소", "질소", "수소", "이산화탄소"], answer: "수소" },
+                    { question: " 제4류 위험물의 증기는 일반적으로 공기보다 무거운가, 가벼운가?", options: ["가볍다", "무겁다", "비슷하다", "물질마다 다르다"], answer: "무겁다" },
+                    { question: " 다음 중 '금수성' 물질의 의미는 무엇인가?", options: ["금속을 녹이는 물질", "물을 만나면 격렬하게 반응하는 물질", "황금처럼 귀한 물질", "수분을 좋아하는 물질"], answer: "물을 만나면 격렬하게 반응하는 물질" },
+                    { question: " 제5류 위험물이 폭발 위험이 큰 이유는 무엇인가?", options: ["독성이 강해서", "가연물과 산소를 모두 가지고 있어서", "액체 상태라서", "쉽게 증발해서"], answer: "가연물과 산소를 모두 가지고 있어서" },
+                    { question: " 위험물 안전관리법에서 '취급소'가 아닌 것은?", options: ["주유취급소", "판매취급소", "옥내탱크저장소", "이송취급소"], answer: "옥내탱크저장소" },
+                    { question: " 제6류 위험물의 공통적인 성질은 무엇인가?", options: ["가연성", "인화성", "산화성 및 부식성", "자기반응성"], answer: "산화성 및 부식성" },
+                    { question: " 위험물을 취급할 때 정전기 방지 조치가 특히 중요한 위험물은 몇 류인가?", options: ["제1류", "제2류", "제3류", "제4류"], answer: "제4류" },
+                    { question: " 화재 발생 시 물을 사용하여 냉각소화하는 것이 효과적인 위험물은?", options: ["칼륨", "휘발유", "황린", "적린"], answer: "적린" },
+                    { question: " 위험물 안전관리법의 최종적인 목표는 무엇이라고 할 수 있는가?", options: ["기업의 이윤 증대", "위험물 기술 개발", "공공의 안전과 생명 보호", "소방관의 역할 증대"], answer: "공공의 안전과 생명 보호" }
+                ]
+            },
+            {
+                id: 2,
+                title: "제1류 위험물 (산화성 고체)",
+                shortTitle: "제1류",
+                description: "다른 물질의 연소를 돕는 산화성 고체의 종류, 특성, 저장 및 취급 방법, 관련 사고 사례를 심층적으로 학습합니다.",
+                themeColor: "lime",
+                videoId: "AWcx5UvUAZM",
+                unlockMonth: 10,
+                content: `<section id="overview" class="py-12 md:py-16"><h3 class="text-2xl md:text-3xl font-bold text-center mb-10">제1류 위험물: 산화성 고체란?</h3><div class="grid md:grid-cols-2 gap-8 items-center"><div class="bg-white p-8 rounded-lg shadow-lg content-card"><h4 class="text-xl font-bold text-lime-600 mb-4">정의 및 특징</h4><p class="text-slate-600 leading-relaxed">자체는 연소하지 않는 불연성 물질이지만, 분자 내에 산소를 다량 함유하고 있어 다른 물질의 연소를 돕거나 촉진시키는 강한 산화력을 가진 고체입니다. 가열, 충격, 마찰에 의해 분해되어 산소를 방출하며, 이는 주변 가연물의 연소를 폭발적으로 만듭니다.</p></div><div class="bg-white p-8 rounded-lg shadow-lg content-card"><h4 class="text-xl font-bold text-lime-600 mb-4">주요 품명</h4><ul class="space-y-2 text-slate-600 list-disc list-inside"><li><strong>염소산염류</strong> (염소산칼륨)</li><li><strong>과염소산염류</strong> (과염소산암모늄)</li><li><strong>질산염류</strong> (질산암모늄)</li><li><strong>무기과산화물</strong> (과산화나트륨)</li></ul></div></div></section><section id="rules" class="py-12 md:py-16"><h3 class="text-2xl md:text-3xl font-bold text-center mb-10">저장, 취급 및 소화 방법</h3><div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8"><div class="bg-white p-6 rounded-lg shadow-lg content-card"><h4 class="font-bold text-lg my-2 text-lime-700 text-center">✅ 저장 및 취급</h4><ul class="text-slate-600 text-sm list-disc list-inside space-y-2 mt-4"><li>가열, 충격, 마찰 및 가연물과의 접촉을 피해야 함.</li><li>용기는 밀폐하고, 환기가 잘 되는 서늘하고 건조한 곳에 보관.</li><li><strong>(중요)</strong> 알칼리금속의 과산화물은 물과 반응하여 산소를 발생시키므로 물기 엄금.</li></ul></div><div class="bg-white p-6 rounded-lg shadow-lg content-card"><h4 class="font-bold text-lg my-2 text-lime-700 text-center">🔥 화재 시 특징</h4><ul class="text-slate-600 text-sm list-disc list-inside space-y-2 mt-4"><li>자체 산소로 인해 연소가 매우 격렬하고 빠르게 진행됨.</li><li>가연물과 혼합되어 있을 경우 폭발적으로 연소.</li></ul></div><div class="bg-white p-6 rounded-lg shadow-lg content-card"><h4 class="font-bold text-lg my-2 text-lime-700 text-center">🧯 소화 방법</h4><ul class="text-slate-600 text-sm list-disc list-inside space-y-2 mt-4"><li><strong>주수 소화 (물로 냉각):</strong> 대부분의 제1류 위험물 화재 시 다량의 물을 사용하여 냉각 소화.</li><li><strong>예외:</strong> 알칼리금속의 과산화물 화재 시에는 물 사용을 절대 금지하고, 마른 모래 등으로 질식 소화.</li></ul></div></div></section><section id="accidents" class="py-12 md:py-16"><h3 class="text-2xl md:text-3xl font-bold text-center mb-10">제1류 위험물 관련 사고 사례</h3><div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden content-card"><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/_U2sC0Jg0n8" title="YouTube video player" frameborder="0" allowfullscreen></iframe></div><div class="p-6"><h4 class="font-bold text-xl mb-2">베이루트 항구 질산암모늄 폭발 (2020)</h4><p class="text-slate-600 text-sm mb-4">항구 창고에 부적절하게 보관되어 있던 약 2,750톤의 질산암모늄이 대폭발을 일으켜 200명 이상이 사망하고 도시의 절반이 파괴되는 대참사가 발생했습니다.</p><div class="bg-lime-100 p-3 rounded"><h5 class="font-bold text-lime-800 text-sm">원인 및 교훈</h5><p class="text-lime-700 text-xs mt-1">산화성 고체를 안전 조치 없이 대량으로 장기간 보관하는 것의 위험성을 보여줍니다. 위험물은 법적 기준에 따라 보관하고, 주변 점화원을 철저히 관리해야 합니다.</p></div></div></div></section>`,
                 quizBank: [
                     { question: " 제1류 위험물의 주된 성질은 무엇인가요?", options: ["가연성", "산화성", "인화성", "자기반응성"], answer: "산화성" },
                     { question: " 다음 중 제1류 위험물이 아닌 것은?", options: ["질산암모늄", "과산화나트륨", "유황", "염소산칼륨"], answer: "유황" },
@@ -208,7 +201,7 @@
                     { question: " 과염소산칼륨은 물에 잘 녹는가?", options: ["잘 녹는다", "잘 녹지 않는다"], answer: "잘 녹지 않는다" },
                     { question: " 제1류 위험물과 혼재하여 보관할 수 없는 것은?", options: ["제6류 위험물", "제2류 위험물", "물", "모래"], answer: "제2류 위험물" },
                     { question: " 제1류 위험물 중 흑색 화약의 원료로 사용되는 것은?", options: ["질산칼륨", "과산화나트륨", "염소산나트륨", "과망간산칼륨"], answer: "질산칼륨" },
-          010. { question: " 제1류 위험물 취급 시 발생하는 가루나 먼지를 흡입하면 인체에 무해하다. (O/X)", options: ["O (맞다)", "X (틀리다)"], answer: "X (틀리다)" },
+                    { question: " 제1류 위험물 취급 시 발생하는 가루나 먼지를 흡입하면 인체에 무해하다. (O/X)", options: ["O (맞다)", "X (틀리다)"], answer: "X (틀리다)" },
                     { question: " 무기과산화물은 어떤 종류의 소화기로 꺼야 하는가?", options: ["물소화기", "포소화기", "탄산수소염류 분말소화기", "이산화탄소소화기"], answer: "탄산수소염류 분말소화기" },
                     { question: " 제1류 위험물 저장소의 온도는 어떻게 유지해야 하는가?", options: ["항상 고온으로 유지", "서늘하고 건조하게 유지", "습도를 높게 유지", "온도는 상관없다"], answer: "서늘하고 건조하게 유지" },
                     { question: " 제1류 위험물은 모두 흰색 고체이다. (O/X)", options: ["O (맞다)", "X (틀리다)"], answer: "X (틀리다)" }
@@ -264,7 +257,7 @@
                 themeColor: "red",
                 videoId: "x3y1IZsEo0s",
                 unlockMonth: 1,
-                content: `<section id="overview" class="py-12 md:py-16"><h3 class="text-2xl md:text-3xl font-bold text-center mb-10">제4류 위험물: 인화성 액체란?</h3><div class="grid md:grid-cols-2 gap-8 items-center"><div class="bg-white p-8 rounded-lg shadow-lg content-card"><h4 class="text-xl font-bold text-red-600 mb-4">정의 및 특징</h4><p class="text-slate-600 leading-relaxed">점화원(불꽃)에 의해 불이 붙는 인화성을 가진 액체입니다. 증기는 공기보다 무거워 바닥 등 낮은 곳에 체류하며, 정전기와 같은 작은 에너지에도 쉽게 발화하여 화재 및 폭발을 일으킬 수 있습니다.</p></div><div class="bg-white p-8 rounded-lg shadow-lg content-card"><h4 class="text-xl font-bold text-red-600 mb-4">주요 품명</h4><ul class="space-y-2 text-slate-600 list-disc list-inside"><li><strong>특수인화물</strong> (디에틸에테르)</li><li><strong>제1석유류</strong> (휘발유, 아세톤)</li><li><strong>알코올류</strong> (메틸알코올)</li><li><strong>제2, 3, 4석유류</strong> (등유, 경유)</li></ul></div></div></section><section id="rules" class="py-12 md:py-16"><h3 class="text-2xl md:text-3xl font-bold text-center mb-10">저장, 취급 및 소화 방법</h3><div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8"><div class="bg-white p-6 rounded-lg shadow-lg content-card"><h4 class="font-bold text-lg my-2 text-red-700 text-center">✅ 저장 및 취급</h4><ul class="text-slate-600 text-sm list-disc list-inside space-y-2 mt-4"><li>화기 엄금 및 점화원 관리 철저.</li><li>유증기가 체류하지 않도록 통풍 및 환기를 잘 시켜야 함.</li><li>정전기 발생을 방지하기 위한 접지 등 안전 조치 필수.</li></ul></div><div class="bg-white p-6 rounded-lg shadow-lg content-card"><h4 class="font-bold text-lg my-2 text-red-700 text-center">🔥 화재 시 특징</h4><ul class="text-slate-600 text-sm list-disc list-inside space-y-2 mt-4"><li>연소 속도가 매우 빠르고, 다량의 열과 빛을 발생.</li><li>대부분 물보다 가벼워 화재 시 물을 뿌리면 연소면이 확대됨.</li></ul></div><div class="bg-white p-6 rounded-lg shadow-lg content-card"><h4 class="font-bold text-lg my-2 text-red-700 text-center">🧯 소화 방법</h4><ul class="text-slate-600 text-sm list-disc list-inside space-y-2 mt-4"><li><strong>질식 소화:</strong> 거품(포), 이산화탄소, 분말소화약제 등을 사용.</li><li><strong>물 사용 금지:</strong> 일반적인 유류 화재에는 주수 소화 금지.</li></ul></div></div></section><section id="accidents" class="py-12 md:py-16"><h3 class="text-2xl md:text-3xl font-bold text-center mb-10">제4류 위험물 관련 사고 사례</h3><div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden content-card"><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/P161JUk-ayY" title="YouTube video player" frameborder="0" allowfullscreen></iframe></div><div class="p-6"><h4 class="font-bold text-xl mb-2">고양 저유소 휘발유 탱크 폭발 (2018)</h4><p class="text-slate-600 text-sm mb-4">외국인 근로자가 날린 풍등이 휘발유 저장탱크 주변 잔디밭에 떨어져, 불씨가 탱크 유증기 환기구를 통해 내부로 들어가면서 대형 폭발과 화재가 발생했습니다.</p><div class="bg-red-100 p-3 rounded"><h5 class="font-bold text-red-800 text-sm">원인 및 교훈</h5><p class="text-red-700 text-xs mt-1">인화성 액체 저장 시설 주변에서는 아주 작은 불씨도 대형 화재의 원인이 될 수 있습니다. 유증기는 눈에 보이지 않으므로, 시설 경계 내에서는 화기 취급을 절대 금지하고 외부 점화원 유입을 철저히 차단해야 합니다.</p></div></div></div></section>`,
+                content: `<section id="overview" class="py-12 md:py-16"><h3 class="text-2xl md:text-3xl font-bold text-center mb-10">제4류 위험물: 인화성 액체란?</h3><div class="grid md:grid-cols-2 gap-8 items-center"><div class="bg-white p-8 rounded-lg shadow-lg content-card"><h4 class="text-xl font-bold text-red-600 mb-4">정의 및 특징</h4><p class="text-slate-600 leading-relaxed">점화원(불꽃)에 의해 불이 붙는 인화성을 가진 액체입니다. 증기는 공기보다 무거워 바닥 등 낮은 곳에 체류하며, 정전기와 같은 작은 에너지에도 쉽게 발화하여 화재 및 폭발을 일으킬 수 있습니다.</p></div><div class="bg-white p-8 rounded-lg shadow-lg content-card"><h4 class="text-xl font-bold text-red-600 mb-4">주요 품명</h4><ul class="space-y-2 text-slate-600 list-disc list-inside"><li><strong>특수인화물</strong> (디에틸에테르)</li><li><strong>제1석유류</strong> (휘발유, 아세톤)</li><li><strong>알코올류</strong> (메틸알코올)</li><li><strong>제2, 3, 4석유류</strong> (등유, 경유)</li></ul></div></div></section><section id="rules" class="py-12 md:py-16"><h3 class="text-2xl md:text-3xl font-bold text-center mb-10">저장, 취급 및 소화 방법</h3><div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8"><div class="bg-white p-6 rounded-lg shadow-lg content-card"><h4 class="font-bold text-lg my-2 text-red-700 text-center">✅ 저장 및 취급</h4><ul class="text-slate-600 text-sm list-disc list-inside space-y-2 mt-4"><li>화기 엄금 및 점화원 관리 철저.</li><li>유증기가 체류하지 않도록 통풍 및 환기를 잘 시켜야 함.</li><li>정전기 발생을 방지하기 위한 접지 등 안전 조치 필수.</li></ul></div><div class="bg-white p-6 rounded-lg shadow-lg content-card"><h4 class="font-bold text-lg my-2 text-red-700 text-center">🔥 화재 시 특징</h4><ul class="text-slate-600 text-sm list-disc list-inside space-y-2 mt-4"><li>액체 자체가 타는 것이 아니라, 증발된 유증기가 연소.</li><li>대부분 물보다 가벼워 화재 시 물을 뿌리면 연소면이 확대됨.</li></ul></div><div class="bg-white p-6 rounded-lg shadow-lg content-card"><h4 class="font-bold text-lg my-2 text-red-700 text-center">🧯 소화 방법</h4><ul class="text-slate-600 text-sm list-disc list-inside space-y-2 mt-4"><li><strong>질식 소화:</strong> 거품(포), 이산화탄소, 분말소화약제 등을 사용.</li><li><strong>물 사용 금지:</strong> 일반적인 유류 화재에는 주수 소화 금지.</li></ul></div></div></section><section id="accidents" class="py-12 md:py-16"><h3 class="text-2xl md:text-3xl font-bold text-center mb-10">제4류 위험물 관련 사고 사례</h3><div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden content-card"><div class="video-wrapper"><iframe src="https://www.youtube.com/embed/P161JUk-ayY" title="YouTube video player" frameborder="0" allowfullscreen></iframe></div><div class="p-6"><h4 class="font-bold text-xl mb-2">고양 저유소 휘발유 탱크 폭발 (2018)</h4><p class="text-slate-600 text-sm mb-4">외국인 근로자가 날린 풍등이 휘발유 저장탱크 주변 잔디밭에 떨어져, 불씨가 탱크 유증기 환기구를 통해 내부로 들어가면서 대형 폭발과 화재가 발생했습니다.</p><div class="bg-red-100 p-3 rounded"><h5 class="font-bold text-red-800 text-sm">원인 및 교훈</h5><p class="text-red-700 text-xs mt-1">인화성 액체 저장 시설 주변에서는 아주 작은 불씨도 대형 화재의 원인이 될 수 있습니다. 유증기는 눈에 보이지 않으므로, 시설 경계 내에서는 화기 취급을 절대 금지하고 외부 점화원 유입을 철저히 차단해야 합니다.</p></div></div></div></section>`,
                 quizBank: [{ question: " 제4류 위험물의 가장 큰 특징은 무엇인가요?", options: ["산화성", "인화성", "자기반응성"], answer: "인화성" }, { question: " 다음 중 제1석유류에 해당하는 것은?", options: ["경유", "휘발유", "중유"], answer: "휘발유" }, { question: " 일반적인 유류 화재 시 물을 뿌리면 안 되는 가장 큰 이유는?", options: ["물이 기름과 섞이지 않아서", "기름이 물보다 가벼워 연소면이 확대되기 때문에", "물이 부족해서"], answer: "기름이 물보다 가벼워 연소면이 확대되기 때문에" }, { question: " 제4류 위험물 취급 시 발생하는 유증기의 특징으로 옳은 것은?", options: ["공기보다 가벼워 위로 뜬다", "색깔이 있어 눈에 잘 보인다", "공기보다 무거워 낮은 곳에 체류한다"], answer: "공기보다 무거워 낮은 곳에 체류한다" }, { question: " 유류 화재에 가장 효과적인 소화 방법은?", options: ["냉각 소화", "질식 소화", "제거 소화"], answer: "질식 소화" }, { question: " 제4류 위험물 취급 장소에서 정전기 방지 조치를 하는 이유는?", options: ["기계 오작동을 막기 위해", "정전기가 점화원이 될 수 있으므로", "전기를 아끼기 위해"], answer: "정전기가 점화원이 될 수 있으므로" }, { question: " 고양 저유소 폭발 사고의 최초 점화원은 무엇이었나요?", options: ["담배꽁초", "용접 불꽃", "풍등"], answer: "풍등" }, { question: " 알코올과 같은 수용성 인화성 액체 화재 시 사용할 수 있는 소화설비는?", options: ["일반 포소화약제", "내알코올포 소화약제", "물"], answer: "내알코올포 소화약제" }, { question: " 제4류 위험물 저장소에 가장 중요한 안전 표지는?", options: ["관계자 외 출입금지", "화기 엄금", "위험물 저장소"], answer: "화기 엄금" }, { question: " 인화점이란 무엇인가요?", options: ["불이 붙는 최저 온도", "스스로 불이 붙는 온도", "액체가 끓는 온도"], answer: "불이 붙는 최저 온도" },
                 { question: " 다음 중 특수인화물에 해당하는 것은?", options: ["아세톤", "에틸알코올", "디에틸에테르", "등유"], answer: "디에틸에테르" },
                 { question: " 제4류 위험물은 물에 잘 녹는가?", options: ["모두 잘 녹는다", "모두 녹지 않는다", "수용성과 비수용성으로 나뉜다", "고체라서 녹지 않는다"], answer: "수용성과 비수용성으로 나뉜다" },
@@ -490,6 +483,7 @@
                     <div class="p-6">
                         <span class="text-sm font-semibold text-${course.themeColor}-600 bg-${course.themeColor}-100 px-3 py-1 rounded-full">교육 ${course.id}</span>
                         <h3 class="text-xl font-bold text-slate-800 mt-4 mb-2">${course.title}</h3>
+                        <p class="text-slate-600 text-sm flex-grow">${course.description}</p>
                     </div>
                     <div class="bg-slate-50 p-4 mt-auto">${buttonHtml}</div>`;
                 portalGrid.appendChild(card);
@@ -556,12 +550,12 @@
                         <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg relative">
                              <div id="confirmation-form-wrapper">
                                 <p class="text-slate-600 mb-6 text-center">아래 정보를 입력하고 '이수 확인증 생성' 버튼을 눌러 교육 이수를 완료하세요.</p>
-                                <!-- [추가] 개인정보 보호 안내 문구 (교육 내부 섹션) -->
-                                <div class="privacy-notice" style="margin-top: -1rem;">
-                                    <p class="text-[10px] md:text-xs text-blue-700 leading-tight font-medium">
-                                        ℹ️ 이 페이지에 입력한 정보는 웹브라우저에만 저장되며 외부로 전송되지 않습니다. 사용 후에는 브라우저에서 직접 삭제해 주시기 바랍니다.
-                                    </p>
-                                </div>
+                                	  <!-- [추가] 개인정보 보호 안내 문구 (교육 내부 섹션) -->
+                                	  <div class="privacy-notice" style="margin-top: -1rem;">
+                                    	  	<p class="text-[10px] md:text-xs text-blue-700 leading-tight font-medium">
+                                          		ℹ️ 이 페이지에 입력한 정보는 웹브라우저에만 저장되며 외부로 전송되지 않습니다. 사용 후에는 브라우저에서 직접 삭제해 주시기 바랍니다.
+                                      		</p>
+                                  	  </div>
                                 <div class="space-y-4">
                                     <div><label for="userName" class="block text-sm font-medium text-slate-700">소속 / 이름</label><input type="text" id="userName" name="userName" placeholder="예: 홍길동 (안전관리팀)" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-${currentCourse.themeColor}-500 focus:border-${currentCourse.themeColor}-500"></div>
                                     <div><label for="completionDate" class="block text-sm font-medium text-slate-700">이수 날짜</label><input type="text" id="completionDate" name="completionDate" readonly class="mt-1 block w-full px-3 py-2 bg-slate-100 border border-slate-300 rounded-md shadow-sm text-slate-500"></div>
@@ -795,7 +789,7 @@
 
         function openCertificateWindow(courseName, userName, completionDate, quizScore) {
             const certWindow = window.open('', '_blank', 'width=1123,height=794');
-            certWindow.document.write(`<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>위험물 안전교육 이수 확인증</title><script src="https://cdn.tailwindcss.com"><\/script><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet"><style>body{font-family:'Noto Sans KR',sans-serif} @media print{#cert-actions{display:none}}</style></head><body class="bg-gray-100 flex items-center justify-center"><div class="bg-white p-10 relative w-full max-w-4xl aspect-[297/210] shadow-lg"><div class="absolute top-8 right-8"><img src="https://d32gkk464bsqbe.cloudfront.net/company-profiles/o/58445cdc9bb4dffd9edfde94c4a06cf87f4ac55f.jpeg?v=6.8.13" alt="Logo" class="w-40"></div><div class="flex flex-col h-full justify-center items-center text-center"><h1 class="text-5xl font-bold text-[#E1251B] mb-20">위험물 안전교육 이수 확인증</h1><div class="text-2xl space-y-4 text-left"><p><strong>교육 과정:</strong> ${courseName}</p><p><strong>날짜:</strong> ${completionDate.replaceAll('-', '.')}</p><p><strong>TEST 결과:</strong> ${quizScore}점</p><p><strong>소속:</strong> 인천 ICDC</p><p><strong>이름:</strong> ${userName}</p></div></div><div id="cert-actions" class="absolute bottom-4 right-4 space-x-2"><button onclick="window.print()" class="bg-red-600 text-white font-bold py-2 px-4 rounded hover:bg-red-700">인쇄</button><button onclick="window.close()" class="bg-slate-500 text-white font-bold py-2 px-4 rounded hover:bg-slate-600">닫기</button></div></div></body></html>`);
+            certWindow.document.write(`<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>위험물 안전교육 이수 확인증</title><script src="https://cdn.tailwindcss.com"><\/script><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet"><style>body{font-family:'Noto Sans KR',sans-serif} @media print{#cert-actions{display:none}}</style></head><body class="bg-gray-100 flex items-center justify-center"><div class="bg-white p-10 relative w-full max-w-4xl aspect-[297/210] shadow-lg"><div class="absolute top-8 right-8"><img src="https://d32gkk464bsqbe.cloudfront.net/company-profiles/o/58445cdc9bb4dffd9edfde94c4a06cf87f4ac55f.jpeg?v=6.8.13" alt="Logo" class="w-40"></div><div class="flex flex-col h-full justify-center items-center text-center"><h1 class="text-3xl font-bold text-[#E1251B] mb-20">위험물 안전교육 이수 확인증</h1><div class="text-2xl space-y-4 text-left"><p><strong>교육 과정:</strong> ${courseName}</p><p><strong>날짜:</strong> ${completionDate.replaceAll('-', '.')}</p><p><strong>TEST 결과:</strong> ${quizScore}점</p><p><strong>소속:</strong> 인천 ICDC</p><p><strong>이름:</strong> ${userName}</p></div></div><div id="cert-actions" class="absolute bottom-4 right-4 space-x-2"><button onclick="window.print()" class="bg-red-600 text-white font-bold py-2 px-4 rounded hover:bg-red-700">인쇄</button><button onclick="window.close()" class="bg-slate-500 text-white font-bold py-2 px-4 rounded hover:bg-slate-600">닫기</button></div></div></body></html>`);
             certWindow.document.close();
         }
 
@@ -830,6 +824,6 @@
                 openCertificateWindow(courseName, userName, completionDate, quizScore);
             });
         });
-    </script>
+    </script>
 </body>
-</html> 
+</html>
